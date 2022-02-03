@@ -44,13 +44,13 @@ def sum_prost(x)
     return sum
 end
 
-#Метод 2. Найти сумму цифр числа, делящихся на 3
+#Метод 2. Найти количество нечетных цифр числа, больших 3
 
-def sum_num_3(n)
+def kol_nechet(n)
     sum = 0
     for dig in n.digits
-        if dig % 3 == 0
-            sum += dig
+        if dig % 2 != 0 && dig > 3
+            sum += 1
         end
     end
     return sum
@@ -64,4 +64,4 @@ puts("Минимальная цифра: #{m_in(n)}")
 puts("Произведение цифр: #{m_ult(n)}")
 
 puts("Сумма простых делителей: #{sum_prost(n)}")
-puts("Сумма цифр числа, делящихся на 3: #{sum_num_3(n)}")
+puts("Количество нечетных цифр числа, больших 3: #{kol_nechet(n)}")
