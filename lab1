@@ -2,9 +2,26 @@
 
 puts "Hello user! Please enter your name: "
 name = gets.chomp
-puts "Привет, #{name}!"
+puts "Привет, #{name}! Какой у тебя любимый ЯП?"
 
 # для того, чтобы узнать все методы типа string:
 # в консоли вызвать irb
 # stroka = 'example'
 # stroka.methods
+
+lang =  gets.chomp.encode("UTF-8")
+
+case lang
+    when "Ruby", "ruby"
+        puts "Получается, что ты подлиза"
+    when "Python", "python"
+        puts "Неплохой выбор, Python тоже ООП, но скоро твоим любимым языком станет Ruby!"
+    when "C#", "c#"
+        puts "Неплохой выбор, с# тоже ООП, но скоро твоим любимым языком станет Ruby!"
+    when "Java", "java"
+        puts "Для меня тёмный лес, но скоро твоим любимым языком станет Ruby!"
+    when "Prolog", "prolog"
+        puts("Ужас... Советую попробовать Ruby")
+    else
+        puts("#{name}? Хм, не знаю такого ЯП, но ты всё равно попробуй Ruby")
+end
