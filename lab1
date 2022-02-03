@@ -1,1 +1,10 @@
-puts "Hello world" #вывод на экран с переводом на новую строку
+# puts "Hello world" #вывод на экран с переводом на новую строку
+
+puts "Hello user! Please enter your name: "
+name = gets.chomp
+puts "Привет, #{name}!"
+
+# для того, чтобы узнать все методы типа string:
+# в консоли вызвать irb
+# stroka = 'example'
+# stroka.methods
