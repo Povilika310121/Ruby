@@ -44,6 +44,18 @@ def sum_prost(x)
     return sum
 end
 
+#Метод 2. Найти сумму цифр числа, делящихся на 3
+
+def sum_num_3(n)
+    sum = 0
+    for dig in n.digits
+        if dig % 3 == 0
+            sum += dig
+        end
+    end
+    return sum
+end
+
 puts("Введите число: ")
 n = gets.chomp.to_i
 puts "Сумма цифр: #{num_sum(n)}"
@@ -52,3 +64,4 @@ puts("Минимальная цифра: #{m_in(n)}")
 puts("Произведение цифр: #{m_ult(n)}")
 
 puts("Сумма простых делителей: #{sum_prost(n)}")
+puts("Сумма цифр числа, делящихся на 3: #{sum_num_3(n)}")
