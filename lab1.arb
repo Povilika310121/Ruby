@@ -1,8 +1,8 @@
 # puts "Hello world" #вывод на экран с переводом на новую строку
 
-puts "Hello user! Please enter your name: "
-name = gets.chomp
+name = ARGV[0]
 puts "Привет, #{name}! Какой у тебя любимый ЯП?"
+ARGV.clear
 
 # для того, чтобы узнать все методы типа string:
 # в консоли вызвать irb
