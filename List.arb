@@ -1,6 +1,7 @@
 # &:   this -> words.map &:length is equivalent to -> words.map { |w| w.length }
 # Чтение списка с клавиатуры. Возвращает список целых чисел.
 def get_int_list
+    ARGV.clear
     return  gets.chomp.split.map(&:to_i)
 end
 
@@ -24,10 +25,23 @@ def lst_mult(lst)
     return lst.reduce(&:*)  # reduce - Объединяет все элементы перечисления путем применения двоичной операции, заданной блоком или символом, который называет метод или оператор.
 end
 
-puts max_el(get_int_list)
 
-puts min_el(get_int_list)
+program_choice = ARGV[0]
 
-puts lst_sum(get_int_list)
+if ARGV[1].to_i == 1 then
+     lst = get_int_list
+else 
+    file = File.open(ARGV[2]) 
+    lst = file.readlines[0].split.map(&:to_i)
+end
 
-puts lst_mult(get_int_list)
+case program_choice
+    when "1"
+        puts ("Максимальный элемент: #{max_el(lst)}")
+    when "2"
+        puts ("Минимальный элемент: #{min_el(lst)}")
+    when "3"
+        puts ("Сумма элементов: #{lst_sum(lst)}")
+    when "4"
+        puts ("Произведение элементов: #{lst_mult(lst)}")
+end
