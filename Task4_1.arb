@@ -17,10 +17,15 @@ def task_13(arr)
     return arr.push(arr.slice!(0...arr.index(arr.min)))
 end
 
+# №25 Дан целочисленный массив и интервал a..b. Необходимо найти максимальный из элементов в этом интервале.
+def task_25(arr, a, b)
+    return arr[a...b].max
+end
+
 program_choice = ARGV[0]
 
 if ARGV[1].to_i == 1 then
-     arr = get_int_list
+    arr = get_int_list
 else 
     file = File.open(ARGV[2]) 
     arr = file.readlines[0].split.map(&:to_i)
@@ -28,4 +33,15 @@ else
 end
 
 # puts kol_after_max(arr)
-puts task_13(arr)
+# puts task_13(arr)
+case program_choice
+when "1"
+    puts kol_after_max(arr)
+when "2"
+    puts task_13(arr)
+when "3"
+    ARGV.clear
+    a = gets.chomp.to_i
+    b = gets.chomp.to_i
+    puts task_25(arr, a, b)
+end
