@@ -11,6 +11,12 @@ def kol_after_max(arr)
     return arr.reverse.index(arr.max)
 end
 
+# №13 Дан целочисленный массив. Необходимо разместить элементы, расположенные до минимального, в конце массива.
+
+def task_13(arr)
+    return arr.push(arr.slice!(0...arr.index(arr.min)))
+end
+
 program_choice = ARGV[0]
 
 if ARGV[1].to_i == 1 then
@@ -21,4 +27,5 @@ else
     file.close
 end
 
-print(kol_after_max(arr))
+# puts kol_after_max(arr)
+puts task_13(arr)
