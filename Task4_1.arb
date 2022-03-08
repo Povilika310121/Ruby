@@ -1,0 +1,24 @@
+#Запуск - имя файла ruby, выбор программы, "1" для ввода с клавиатуры, иначе другая цифра и название файла  
+
+def get_int_list
+    ARGV.clear
+    return  gets.chomp.split.map(&:to_i)
+end
+
+# №1 Дан целочисленный массив. Необходимо найти количество элементов, расположенных после последнего максимального.
+
+def kol_after_max(arr)
+    return arr.reverse.index(arr.max)
+end
+
+program_choice = ARGV[0]
+
+if ARGV[1].to_i == 1 then
+     arr = get_int_list
+else 
+    file = File.open(ARGV[2]) 
+    arr = file.readlines[0].split.map(&:to_i)
+    file.close
+end
+
+print(kol_after_max(arr))
