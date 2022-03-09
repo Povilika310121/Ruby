@@ -1,3 +1,5 @@
+require 'set'
+require 'prime'
 #Запуск - имя файла ruby, выбор программы, "1" для ввода с клавиатуры, иначе другая цифра и название файла  
 
 def get_int_list
@@ -28,6 +30,27 @@ def task_37(arr)
     str = "Количество: #{temp.size}, индексы: #{temp}"
     return str
 end    
+
+# №49 Для введенного списка положительных чисел построить список всех положительных простых делителей элементов списка без повторений.
+
+def spisok_del(x,i = 2, sp =[])
+    if i == x || x == 1
+        return sp
+    end
+    if x%i==0 
+        sp.push(i) 
+    end
+    spisok_del(x, i+1, sp)
+end
+
+
+def task_49(arr, ind=0, arr_new = [])
+    if ind == arr.size
+        return arr_new.to_set
+    end
+    task_49(arr, ind+1, arr_new.concat(spisok_del(arr[ind])))
+end
+
 program_choice = ARGV[0]
 
 if ARGV[1].to_i == 1 then
@@ -50,4 +73,6 @@ when "3"
     puts task_25(arr, a, b)
 when "4"
     puts task_37(arr)
+when "5"
+    puts task_49(arr)
 end
