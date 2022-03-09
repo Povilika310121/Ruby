@@ -22,6 +22,12 @@ def task_25(arr, a, b)
     return arr[a...b].max
 end
 
+# №37 Дан целочисленный массив. Вывести индексы элементов, которые меньше своего левого соседа, и количество таких чисел.
+def task_37(arr)
+    temp = (1...arr.size).select{ |x| arr[x] < arr[x-1] }
+    str = "Количество: #{temp.size}, индексы: #{temp}"
+    return str
+end    
 program_choice = ARGV[0]
 
 if ARGV[1].to_i == 1 then
@@ -32,8 +38,6 @@ else
     file.close
 end
 
-# puts kol_after_max(arr)
-# puts task_13(arr)
 case program_choice
 when "1"
     puts kol_after_max(arr)
@@ -44,4 +48,6 @@ when "3"
     a = gets.chomp.to_i
     b = gets.chomp.to_i
     puts task_25(arr, a, b)
+when "4"
+    puts task_37(arr)
 end
