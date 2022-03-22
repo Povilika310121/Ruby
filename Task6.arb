@@ -5,3 +5,5 @@ lines = file.readlines
 file.close
 
 puts lines.sort_by{ |i| i.size }
+puts "___"
+puts lines.sort_by{ |i| i.split().size }
