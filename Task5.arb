@@ -13,3 +13,28 @@ puts a == a.reverse
 
 str="He was born 01.03.1990, she was born 02.February.2000"
 puts str.scan(/([0-2]\d|3[0-1]).(0[1-9]|1[0-2]|January|February|March|April|May|June|July|August|September|October|November|December).(\d{4})/).map{|e| e.join('.')}.join(" ")
+
+# 2.1 Дана строка. Необходимо найти максимальное из имеющихся в ней вещественных чисел.
+def max_ploat(str)
+    return str.scan(/\-\d+\.\d+|\d+\.\d+/).map{ |n| n.to_f }.max
+end
+
+
+program_choice = ARGV[0]
+
+case program_choice
+when "1"
+    str = "124.23489, -145.74, 1.00011 124.2349"
+    puts max_ploat(str)
+# when "2"
+#     puts task_13(arr)
+# when "3"
+#     ARGV.clear
+#     a = gets.chomp.to_i
+#     b = gets.chomp.to_i
+#     puts task_25(arr, a, b)
+# when "4"
+#     puts task_37(arr)
+# when "5"
+#     puts task_49(arr)
+end
