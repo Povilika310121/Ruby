@@ -1,0 +1,7 @@
+file_name = ARGV[0]
+
+file = File.new(file_name, 'r:UTF-8')
+lines = file.readlines
+file.close
+
+puts lines.sort_by{ |i| i.size }
