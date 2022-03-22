@@ -8,3 +8,8 @@ puts str.split("").select{ |n| ( n>="а" || n>="А" )&&( n<= "я" || n<="Я" ) }
 str = "12ВНГдasdWdsa"
 a = str.scan (/[a-z]/)
 puts a == a.reverse
+
+# 18 Найти в тексте даты формата «день.месяц.год».
+
+str="He was born 01.03.1990, she was born 02.February.2000"
+puts str.scan(/([0-2]\d|3[0-1]).(0[1-9]|1[0-2]|January|February|March|April|May|June|July|August|September|October|November|December).(\d{4})/).map{|e| e.join('.')}.join(" ")
