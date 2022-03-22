@@ -15,10 +15,18 @@ str="He was born 01.03.1990, she was born 02.February.2000"
 puts str.scan(/([0-2]\d|3[0-1]).(0[1-9]|1[0-2]|January|February|March|April|May|June|July|August|September|October|November|December).(\d{4})/).map{|e| e.join('.')}.join(" ")
 
 # 2.1 Дана строка. Необходимо найти максимальное из имеющихся в ней вещественных чисел.
-def max_ploat(str)
+def max_float(str)
     return str.scan(/\-\d+\.\d+|\d+\.\d+/).map{ |n| n.to_f }.max
 end
 
+def min_float(str)
+    # формат: x/y или x.y
+    return str.scan(/[-+]?\d+\/\d+|[-+]?\d+\.\d+/).map{|e| e.to_f}.min
+end
+
+def kol_num(str)
+    return str.scan(/\d*/).sort_by{ |i| i.size }[-1].size
+end
 
 program_choice = ARGV[0]
 
@@ -26,15 +34,10 @@ case program_choice
 when "1"
     str = "124.23489, -145.74, 1.00011 124.2349"
     puts max_ploat(str)
-# when "2"
-#     puts task_13(arr)
-# when "3"
-#     ARGV.clear
-#     a = gets.chomp.to_i
-#     b = gets.chomp.to_i
-#     puts task_25(arr, a, b)
-# when "4"
-#     puts task_37(arr)
-# when "5"
-#     puts task_49(arr)
+when "2"
+    str = "1/2 0.49 4/3 -7.8"
+    puts min_float(str)
+when "3"
+    stroka="1234ab1 12345bc de"
+    puts kol_num(str)
 end
