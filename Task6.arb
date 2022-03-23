@@ -4,6 +4,26 @@ file = File.new(file_name, 'r:UTF-8')
 lines = file.readlines
 file.close
 
-puts lines.sort_by{ |i| i.size }
-puts "___"
-puts lines.sort_by{ |i| i.split().size }
+# puts lines.sort_by{ |i| i.size }
+# puts "___"
+# puts lines.sort_by{ |i| i.split().size }
+
+# puts "Отсортировать строки в порядке:\n 1. B порядке увеличения разницы между средним количеством согласных и средним количеством гласных букв в строке"
+
+def s_g (lines)
+    return lines.sort_by{|n| ((n.scan(/[aeiouy]/)).size - (n.scan(/[qwrtpasdfghjklzxcvbnm]/)).size)}
+end
+
+program_choice = ARGV[1]
+
+case program_choice
+when "1"
+    puts s_g(lines)
+# when "2"
+#     str = "1/2 0.49 4/3 -7.8"
+#     puts min_float(str)
+# when "3"
+#     stroka="1234ab1 12345bc de"
+#     puts kol_num(str)
+end
+
