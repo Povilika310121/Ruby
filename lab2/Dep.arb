@@ -1,3 +1,15 @@
 class Department
+    def initialize (name, phone)
+        @name = name
+        @phone = phone
+      end
+
     attr_accessor :name, :phone
 end
+
+first = Department.new('Moscow', '8900')
+
+second = Department.new('Krasnodar', '8901')
+
+p "Name of department - #{first.name}, phone is #{first.phone}" 
+p "Name of department - #{second.name}, phone is #{second.phone}" 
