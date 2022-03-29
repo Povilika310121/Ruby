@@ -1,10 +1,22 @@
 class Department
     def initialize (name, phone)
         @name = name
-        @phone = phone
+        self.phone = phone
       end
 
-    attr_accessor :name, :phone
+    attr_accessor :name
+    attr_reader :phone
+
+    def phone=(phone)
+        if valid_phone?(phone)
+          @phone = phone
+        else raise ArgumentError.new("Номер телефона введен неверно!")
+        end
+      end
+
+    def valid_phone?(phone)
+        /8\(?([0-9]{3})\)/ =~ phone
+    end
 
     def to_output
         "Name: #{name} Phone: #{phone}"
@@ -13,8 +25,8 @@ class Department
 end
 
 first = Department.new('Moscow', '8900')
-
-second = Department.new('Krasnodar', '8901')
+second = Department.new('Krasnodar', '8904451')
 
 p first.to_output
+p second.to_output
 
