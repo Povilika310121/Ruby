@@ -12,13 +12,13 @@ class Department
   attr_reader :phone
 
   def phone=(phone)
-      if valid_phone?(phone)
+      if Department.valid_phone?(phone)
         @phone = phone
       else raise ArgumentError.new("Номер телефона введен неверно!")
       end
   end
 
-  def valid_phone?(phone)
+  def Department.valid_phone?(phone)
       /\+?[1-9][0-9]{4}/ =~ phone
   end
 
