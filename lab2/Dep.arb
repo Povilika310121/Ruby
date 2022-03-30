@@ -1,32 +1,74 @@
 class Department
-    def initialize (name, phone)
-        @name = name
-        self.phone = phone
-      end
+  @@list_objects = []
 
-    attr_accessor :name
-    attr_reader :phone
-
-    def phone=(phone)
-        if valid_phone?(phone)
-          @phone = phone
-        else raise ArgumentError.new("Номер телефона введен неверно!")
-        end
-      end
-
-    def valid_phone?(phone)
-        /8\(?([0-9]{3})\)/ =~ phone
+  def initialize (name, phone, duties = [])
+      @name = name
+      self.phone = phone
+      @duties = duties
+      @@list_objects << self
     end
 
-    def to_output
-        "Name: #{name} Phone: #{phone}"
-    end
+  attr_accessor :name, :highligth_duty
+  attr_reader :phone
 
+  def phone=(phone)
+      if valid_phone?(phone)
+        @phone = phone
+      else raise ArgumentError.new("Номер телефона введен неверно!")
+      end
+  end
+
+  def valid_phone?(phone)
+      /\+?[1-9][0-9]{4}/ =~ phone
+  end
+
+  def pr_duties_in_str
+      @duties.join(', ')
+  end
+
+  def pr_highligth_duty
+      @duties[@highligth_duty]
+  end
+
+  def add_duties(val)
+      @duties << val
+  end
+
+  def del_duties(ind)
+      @duties.delete_at(ind)
+  end
+
+  def highligth(ind)
+      @highligth_duty = ind
+  end
+
+  def highligth_read()
+      @duties[@highligth_duty]
+  end
+
+  def replace_highligth_duty(text)
+      @duties[@highligth_duty] = text
+  end
+
+  def to_s
+      unless @duties.empty?
+          duty = @duties.join(', ')
+          return "Имя: #{@name}\nНомер телефона: #{@phone}\nОбязанности: #{duty}\n"
+      end
+      "Имя: #{@name}\nНомер телефона: #{@phone}\n"
+  end
 end
 
-first = Department.new('Moscow', '8900')
-second = Department.new('Krasnodar', '8904451')
 
-p first.to_output
-p second.to_output
+first = Department.new('Moscow', '+79000')
+second = Department.new('Krasnodar', '89001')
 
+first.add_duties('asd')
+first.add_duties('qwe')
+puts first.pr_duties_in_str
+# first.del_duties(1)
+first.highligth(1)
+puts first.highligth_read
+
+puts first
+puts second
