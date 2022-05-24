@@ -1,0 +1,8 @@
+class Department
+    
+    attr_accessor :name, :phone_number #attr_accessor геттер и сеттор одновременно
+
+    def initialize(name, phone_number)
+        @name, @phone_number = name, phone_number
+    end
+end
