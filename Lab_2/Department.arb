@@ -121,15 +121,19 @@ class Department_list < Department
         s
     end
 
+    def sort()
+        @dep_list.sort! {|a, b| a.name <=> b.name}
+    end
+
 end
 
 
 from_yaml=Department_list.read_from_YAML("output_yaml")
-puts from_yaml
-from_txt=Department_list.read_from_txt("export")
 list_dep = Department_list.new()
 list_dep.add_note(from_yaml)
-list_dep.add_note(from_txt)
+puts list_dep.sort
+
+
 # ktoto = Department.new('Ktoto', '+7-901-013-42-31')
 # ktoto.add_duty("1")
 # ktoto.add_duty("2")
@@ -138,10 +142,6 @@ list_dep.add_note(from_txt)
 # puts list_dep
 # list_dep.choose_note(2)
 # list_dep.delete_note
-puts list_dep
-
-
-
 # Department.write_to_YAML(from_yaml, "output_yaml")
 # puts Department.read_from_YAML("output_yaml")
 # danna = Department.new("Danna", "+79009053535")
