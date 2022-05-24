@@ -48,49 +48,10 @@ class Department
         end
         s + "\n"
     end
-
-    def Department.read_from_txt(file_name)
-        file = File.new(file_name + ".txt", "r")
-        (file.read.split(/~\n/).map { |object_str| object_str.split(/\n/) }).map { |object| object = Department.new(object.shift, object.shift, object)}
-        #shift возвращает элемент массива и удаляет его
-    end
-
-    def Department.print_from_txt(array)
-        s = ""
-        array.length.times do |index|
-            if array[index].duties.empty?
-                s+= "##{index + 1}\n\tName: #{array[index].name}\n\tPhone: #{array[index].phone_number}\n"
-            else
-                s+= "##{index + 1}\n\tName: #{array[index].name}\n\tPhone: #{array[index].phone_number}\n\tDuties: \n\t"
-                array[index].duties.each_index { |i| s+= "\t #{i+1}. #{array[index].duties[i]}\n\t" } 
-            end
-            s+="\n"  
-        end
-        s
-    end
-
-    def Department.write_to_txt(array, file_name)
-        output = File.new(file_name + ".txt", "w")
-        output.puts array.map { |object| object = ([] << object.name << object.phone_number << object.duties).join("\n") }.join("\n~\n")
-        output.close()
-    end
-
-    def Department.write_to_YAML(array, file_name)
-        require 'yaml'
-        output = File.new(file_name + ".yaml", "w")
-        YAML.dump(array, output)
-        output.close()
-    end
-
-    def Department.read_from_YAML(file_name)
-        require 'yaml'
-        YAML.load_file (file_name + ".yaml"), permitted_classes: [Department]
-    end
   
 end
 
-class Department_list
-    # attr_accessor :dep_list
+class Department_list < Department
     def initialize(*dep_list)  # * - Передача произвольного числа аргументов в метод
       @dep_list = dep_list
     end
@@ -122,26 +83,61 @@ class Department_list
         @index-=1
     end
 
-    def to_s
-        s = "\n"
-        @dep_list.each_index { |i| s += "##{i + 1}\n" + @dep_list[i].to_s }
+    def Department_list.read_from_txt(file_name)
+        file = File.new(file_name + ".txt", "r")
+        (file.read.split(/~\n/).map { |object_str| object_str.split(/\n/) }).map { |object| object = Department.new(object.shift, object.shift, object)}
+        #shift возвращает элемент массива и удаляет его
+    end
+
+    def Department_list.write_to_txt(array, file_name)
+        output = File.new(file_name + ".txt", "w")
+        output.puts array.map { |object| object = ([] << object.name << object.phone_number << object.duties).join("\n") }.join("\n~\n")
+        output.close()
+    end
+
+    def Department_list.write_to_YAML(array, file_name)
+        require 'yaml'
+        output = File.new(file_name + ".yaml", "w")
+        YAML.dump(array, output)
+        output.close()
+    end
+
+    def Department_list.read_from_YAML(file_name)
+        require 'yaml'
+        YAML.load_file (file_name + ".yaml"), permitted_classes: [Department]
+    end
+
+    def to_s()
+        s = ""
+        @dep_list.length.times do |index|
+            if @dep_list[index].duties.empty?
+                s+= "##{index + 1}\n\tName: #{@dep_list[index].name}\n\tPhone: #{@dep_list[index].phone_number}\n"
+            else
+                s+= "##{index + 1}\n\tName: #{@dep_list[index].name}\n\tPhone: #{@dep_list[index].phone_number}\n\tDuties: \n\t"
+                @dep_list[index].duties.each_index { |i| s+= "\t #{i+1}. #{@dep_list[index].duties[i]}\n\t" } 
+            end
+            s+="\n"  
+        end
         s
     end
 
 end
 
 
-from_yaml=Department.read_from_YAML("output_yaml")
+from_yaml=Department_list.read_from_YAML("output_yaml")
+puts from_yaml
+from_txt=Department_list.read_from_txt("export")
 list_dep = Department_list.new()
 list_dep.add_note(from_yaml)
-ktoto = Department.new('Ktoto', '+7-901-013-42-31')
-ktoto.add_duty("1")
-ktoto.add_duty("2")
-ktoto.add_duty("3")
-list_dep.add_note(ktoto)
-puts list_dep
-list_dep.choose_note(2)
-list_dep.delete_note
+list_dep.add_note(from_txt)
+# ktoto = Department.new('Ktoto', '+7-901-013-42-31')
+# ktoto.add_duty("1")
+# ktoto.add_duty("2")
+# ktoto.add_duty("3")
+# list_dep.add_note(ktoto)
+# puts list_dep
+# list_dep.choose_note(2)
+# list_dep.delete_note
 puts list_dep
 
 
