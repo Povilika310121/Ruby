@@ -1,0 +1,12 @@
+puts "Введи команду ОС:"
+command1 = STDIN.gets.chomp
+
+puts "Введи команду Ruby:"
+command2 = STDIN.gets.chomp
+
+puts "Команда ОС:"
+system(command1)
+
+puts "Команда Ruby:"
+puts eval(command2)
+

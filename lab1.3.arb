@@ -1,0 +1,18 @@
+puts "Угадай число, которое я загадал. Попробуй: "
+pup = gets.chomp.to_i
+
+if pup != 17 then
+    puts 'Мимо!'
+end
+
+if pup != 17 then
+    puts 'Мимо!'
+else 
+    puts 'Молодец!'
+end
+
+puts 'Мимо!' if pup != 17
+
+x = unless pup == 17 then 
+puts 'Мимо!' else puts 'Good job!'
+end

@@ -1,0 +1,116 @@
+# Сумма цифр числа
+def num_sum (n)
+    return n.digits.sum # 12345.digits  => [5, 4, 3, 2, 1]
+end
+
+# Максимальная цифра числа
+def m_ax(n)
+    return n.digits.max
+end
+
+# Минимальная цифра числа
+def m_in(n)
+    return n.digits.min
+end
+
+# Произведение цифр числа
+def m_ult(n)
+    res = 1
+    lst = n.digits
+    for el in lst
+        res = res * el
+    end
+    return res
+end
+
+#Метод 1. Найти сумму простых делителей числа.
+
+def prost(x)
+    for i in 2..x/2
+        if x%i==0
+            return false
+        end
+    end
+    return true
+end
+
+def sum_prost(x)
+    sum = 0
+    for i in 2..x/2
+        if x%i==0 && prost(i)
+            sum+=i
+        end
+    end
+    return sum
+end
+
+#Метод 2. Найти количество нечетных цифр числа, больших 3
+
+def kol_nechet(n)
+    sum = 0
+    for dig in n.digits
+        if dig % 2 != 0 && dig > 3
+            sum += 1
+        end
+    end
+    return sum
+end
+
+# Метод 3. Найти произведение таких делителей числа, сумма цифр которых меньше, чем сумма цифр исходного числа.
+
+def mult_ex(n)
+    res = 1
+    ex = num_sum(n)
+    for i in 1..n/2
+        if num_sum(i) < ex
+            res = res * i
+        end
+    end
+    return res
+end
+
+for i in 0 ... ARGV.length      # Цикл кол-ва аргументов. Сколько аргументов - столько и вызовов
+    program = ARGV[i] # Параметр запуска
+    case program
+        when "1"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts "Сумма цифр: #{num_sum(n)}"
+        when "2"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Максимальная цифра: #{m_ax(n)}")
+        when "3"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Минимальная цифра: #{m_in(n)}")
+        when "4"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Произведение цифр: #{m_ult(n)}")
+        when "5"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Сумма простых делителей: #{sum_prost(n)}")
+        when "6"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Количество нечетных цифр числа, больших 3: #{kol_nechet(n)}")
+        when "7"
+            puts("Введите число: ")
+            n = STDIN.gets.chomp.to_i
+            puts("Произведение таких делителей числа, сумма цифр которых меньше, чем сумма цифр исходного числа: #{mult_ex(n)}")
+        when "h"
+            puts("Привет, рассказываю про программу: \nПри вызове указываем параметр запуска (1-7)
+            1) Сумма цифр числа.
+            2) Максимальная цифра числа.
+            3) Минимальная цифра числа.
+            4) Произведение цифр числа.
+            5) Сумма простых делителей числа.
+            6) Количество нечетных цифр числа, больших 3
+            7) Произведение таких делителей числа, сумма цифр которых меньше, чем сумма цифр исходного числа.
+            Можно вызывать один или несколько методов программы, в зависимости от переданных параметров.")
+        else
+            puts 'Введен неверный параметр запуска или вовсе не указан, попробуйте ввести h для справки.'
+        end
+    end

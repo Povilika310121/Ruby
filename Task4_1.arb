@@ -1,0 +1,78 @@
+require 'set'
+require 'prime'
+#Запуск - имя файла ruby, выбор программы, "1" для ввода с клавиатуры, иначе другая цифра и название файла  
+
+def get_int_list
+    ARGV.clear
+    return  gets.chomp.split.map(&:to_i)
+end
+
+# №1 Дан целочисленный массив. Необходимо найти количество элементов, расположенных после последнего максимального.
+
+def kol_after_max(arr)
+    return arr.reverse.index(arr.max)
+end
+
+# №13 Дан целочисленный массив. Необходимо разместить элементы, расположенные до минимального, в конце массива.
+
+def task_13(arr)
+    return arr.push(arr.slice!(0...arr.index(arr.min)))
+end
+
+# №25 Дан целочисленный массив и интервал a..b. Необходимо найти максимальный из элементов в этом интервале.
+def task_25(arr, a, b)
+    return arr[a...b].max
+end
+
+# №37 Дан целочисленный массив. Вывести индексы элементов, которые меньше своего левого соседа, и количество таких чисел.
+def task_37(arr)
+    temp = (1...arr.size).select{ |x| arr[x] < arr[x-1] }
+    str = "Количество: #{temp.size}, индексы: #{temp}"
+    return str
+end    
+
+# №49 Для введенного списка положительных чисел построить список всех положительных простых делителей элементов списка без повторений.
+
+def spisok_del(x,i = 2, sp =[])
+    if i == x || x == 1
+        return sp
+    end
+    if x%i==0 
+        sp.push(i) 
+    end
+    spisok_del(x, i+1, sp)
+end
+
+
+def task_49(arr, ind=0, arr_new = [])
+    if ind == arr.size
+        return arr_new.to_set
+    end
+    task_49(arr, ind+1, arr_new.concat(spisok_del(arr[ind])))
+end
+
+program_choice = ARGV[0]
+
+if ARGV[1].to_i == 1 then
+    arr = get_int_list
+else 
+    file = File.open(ARGV[2]) 
+    arr = file.readlines[0].split.map(&:to_i)
+    file.close
+end
+
+case program_choice
+when "1"
+    puts kol_after_max(arr)
+when "2"
+    puts task_13(arr)
+when "3"
+    ARGV.clear
+    a = gets.chomp.to_i
+    b = gets.chomp.to_i
+    puts task_25(arr, a, b)
+when "4"
+    puts task_37(arr)
+when "5"
+    puts task_49(arr)
+end
