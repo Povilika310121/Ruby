@@ -54,6 +54,22 @@ class Department
         (file.read.split(/~\n/).map { |object_str| object_str.split(/\n/) }).map { |object| object = Department.new(object.shift, object.shift, object)}
         #shift возвращает элемент массива и удаляет его
     end
+
+    def Department.print_from_txt(array)
+        s = ""
+        array.length.times do |index|
+            if array[index].duties.empty?
+                s+= "##{index + 1}\n\tName: #{array[index].name}\n\tPhone: #{array[index].phone_number}\n"
+            else
+                s+= "##{index + 1}\n\tName: #{array[index].name}\n\tPhone: #{array[index].phone_number}\n\tDuties: \n\t"
+                array[index].duties.each_index { |i| s+= "\t #{i+1}. #{array[index].duties[i]}\n\t" } 
+            end
+            s+="\n"  
+        end
+        s
+    end
+
+    
   
 end
 
@@ -65,5 +81,6 @@ end
 # vika.highligth(3)
 # vika.replace_highligth_duty("учиться всю ночь")
 # puts vika, danna
+from_txt=Department.read_from_txt("export")
 
-p Department.read_from_txt("export").class.name
+puts Department.print_from_txt(from_txt)
