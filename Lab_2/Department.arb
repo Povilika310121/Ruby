@@ -77,15 +77,20 @@ class Department
   
 end
 
-vika = Department.new('Vika', '+7-901-013-42-31', )
-danna = Department.new("Danna", "+79009053535")
+#2.5
+from_txt=Department.read_from_txt("export")
+puts Department.print_from_txt(from_txt)
+vika = Department.new('Vika', '+7-901-013-42-31')
 vika.add_duty("сделать всю домашку")
 vika.add_duty("найти работу")
 vika.add_duty("выспаться")
-vika.highligth(3)
-vika.replace_highligth_duty("учиться всю ночь")
-puts vika, danna
-from_txt=Department.read_from_txt("export")
-# puts Department.print_from_txt(from_txt)
+from_txt<<vika
+puts from_txt
+Department.write_to_txt(from_txt, "export")
+
+# danna = Department.new("Danna", "+79009053535")
+# vika.highligth(3)
+# vika.replace_highligth_duty("учиться всю ночь")
+# puts vika, danna
 # Department.write_to_txt(from_txt, "output")
-Department.write_to_txt([vika, danna], "output")
+# Department.write_to_txt([vika, danna], "output")
