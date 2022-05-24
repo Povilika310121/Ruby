@@ -69,18 +69,23 @@ class Department
         s
     end
 
-    
+    def Department.write_to_txt(array, file_name)
+        output = File.new(file_name + ".txt", "w")
+        output.puts array.map { |object| object = ([] << object.name << object.phone_number << object.duties).join("\n") }.join("\n~\n")
+        output.close()
+    end
   
 end
 
-# vika = Department.new('Vika', '+7-901-013-42-31', )
-# danna = Department.new("Danna", "+79009053535")
-# vika.add_duty("сделать всю домашку")
-# vika.add_duty("найти работу")
-# vika.add_duty("выспаться")
-# vika.highligth(3)
-# vika.replace_highligth_duty("учиться всю ночь")
-# puts vika, danna
+vika = Department.new('Vika', '+7-901-013-42-31', )
+danna = Department.new("Danna", "+79009053535")
+vika.add_duty("сделать всю домашку")
+vika.add_duty("найти работу")
+vika.add_duty("выспаться")
+vika.highligth(3)
+vika.replace_highligth_duty("учиться всю ночь")
+puts vika, danna
 from_txt=Department.read_from_txt("export")
-
-puts Department.print_from_txt(from_txt)
+# puts Department.print_from_txt(from_txt)
+# Department.write_to_txt(from_txt, "output")
+Department.write_to_txt([vika, danna], "output")
