@@ -1,16 +1,49 @@
 class Department
     
-    attr_accessor :name, :phone_number #attr_accessor геттер и сеттор одновременно
+    attr_accessor :name, :phone_number, :duties #attr_accessor геттер и сеттор одновременно
 
-    def initialize(name, phone_number)
+    def initialize(name, phone_number,  duties = [])
         @name, @phone_number = name, phone_number
+        @duties = duties
+    end
+
+    def add_duty(duty)
+        @duties <<duty
+    end
+
+    def highligth(ind)
+        @highligth_duty = ind - 1
+    end
+
+    def del_duties(ind)
+        @duties.delete_at(ind-1)
+    end
+
+    def highligth_read()
+        @duties[@highligth_duty]
+    end
+
+    def replace_highligth_duty(text)
+        @duties[@highligth_duty] = text
     end
 
     def to_s
-        "Name: #{name}\nPhone: #{phone_number};\n"
-      end
+        if @duties.empty?
+            s = "Name: #{@name}\nPhone: #{@phone_number}\n"
+        else
+            s = "Name: #{@name}\nPhone: #{@phone_number}\nDuties: \n"
+            @duties.each_index { |i| s += "\t #{i+1}) #{@duties[i]}\n" } 
+        end
+        s + "\n"
+    end
+  
 end
 
-vika = Department.new('Vika', '+79010134231')
+vika = Department.new('Vika', '+79010134231', )
 danna = Department.new("Danna", "+79009053535")
+vika.add_duty("сделать всю домашку")
+vika.add_duty("найти работу")
+vika.add_duty("выспаться")
+vika.highligth(3)
+vika.replace_highligth_duty("учиться всю ночь")
 puts vika, danna
