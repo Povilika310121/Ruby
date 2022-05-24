@@ -5,4 +5,12 @@ class Department
     def initialize(name, phone_number)
         @name, @phone_number = name, phone_number
     end
+
+    def to_s
+        "Name: #{name}\nPhone: #{phone_number};\n"
+      end
 end
+
+vika = Department.new('Vika', '+79010134231')
+danna = Department.new("Danna", "+79009053535")
+puts vika, danna
