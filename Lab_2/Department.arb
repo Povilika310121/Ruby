@@ -89,18 +89,15 @@ class Department
   
 end
 
-#2.5
-from_txt=Department.read_from_txt("export")
-# puts Department.print_from_txt(from_txt)
-# vika = Department.new('Vika', '+7-901-013-42-31')
-# vika.add_duty("сделать всю домашку")
-# vika.add_duty("найти работу")
-# vika.add_duty("выспаться")
-# from_txt<<vika
-# puts from_txt
-# Department.write_to_txt(from_txt, "export")
-Department.write_to_YAML(from_txt, "output_yaml")
-puts Department.read_from_YAML("output_yaml")
+from_yaml=Department.read_from_YAML("output_yaml")
+puts from_yaml
+vika = Department.new('Vika', '+7-901-013-42-31')
+vika.add_duty("сделать всю домашку")
+vika.add_duty("найти работу")
+vika.add_duty("выспаться")
+from_yaml<<vika
+Department.write_to_YAML(from_yaml, "output_yaml")
+# puts Department.read_from_YAML("output_yaml")
 # danna = Department.new("Danna", "+79009053535")
 # vika.highligth(3)
 # vika.replace_highligth_duty("учиться всю ночь")
