@@ -81,6 +81,11 @@ class Department
         YAML.dump(array, output)
         output.close()
     end
+
+    def Department.read_from_YAML(file_name)
+        require 'yaml'
+        YAML.load_file (file_name + ".yaml"), permitted_classes: [Department]
+    end
   
 end
 
@@ -95,7 +100,7 @@ from_txt=Department.read_from_txt("export")
 # puts from_txt
 # Department.write_to_txt(from_txt, "export")
 Department.write_to_YAML(from_txt, "output_yaml")
-
+puts Department.read_from_YAML("output_yaml")
 # danna = Department.new("Danna", "+79009053535")
 # vika.highligth(3)
 # vika.replace_highligth_duty("учиться всю ночь")
