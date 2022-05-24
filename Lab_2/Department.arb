@@ -1,11 +1,23 @@
 class Department
     
-    attr_accessor :name, :phone_number, :duties #attr_accessor геттер и сеттор одновременно
-
+    attr_accessor :name, :duties #attr_accessor геттер и сеттор одновременно
+    attr_reader :phone_number
     def initialize(name, phone_number,  duties = [])
-        @name, @phone_number = name, phone_number
+        @name = name
+        self.phone_number = phone_number
         @duties = duties
     end
+
+    def phone_number=(phone_number)
+        if Department.check_phone?(phone_number)
+          @phone_number = phone_number
+        else raise ArgumentError.new("#{phone_number} не номер телефона!")
+        end
+    end
+
+    def Department.check_phone?(phone_number)
+        /\+7([.-]?)([0-9]{3})([.-]?)([0-9]{3})([.-]?)([0-9]{2})([.-]?)([0-9]{2})/ =~ phone_number
+      end
 
     def add_duty(duty)
         @duties <<duty
@@ -39,7 +51,7 @@ class Department
   
 end
 
-vika = Department.new('Vika', '+79010134231', )
+vika = Department.new('Vika', '+7-901-013-42-31', )
 danna = Department.new("Danna", "+79009053535")
 vika.add_duty("сделать всю домашку")
 vika.add_duty("найти работу")
