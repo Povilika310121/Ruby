@@ -90,22 +90,63 @@ class Department
 end
 
 class Department_list
-    def initialize(*list)  # * - Передача произвольного числа аргументов в метод
-      @dep_list = Array.new
+    # attr_accessor :dep_list
+    def initialize(*dep_list)  # * - Передача произвольного числа аргументов в метод
+      @dep_list = dep_list
     end
+
+    def add_note(dep)
+        if dep.class.name == "Array"
+            dep.length.times do |index|
+                @dep_list.append(dep[index])
+            end
+        else
+            @dep_list.append(dep)
+        end
+    end
+
+    def choose_note(index)
+        @index = index - 1
+    end
+
+    def change_note(new_dep)
+        @dep_list[@index] = new_dep
+    end
+
+    def get_note
+        @dep_list[@index]
+    end
+
+    def delete_note
+        @dep_list.delete_at(@index)
+        @index-=1
+    end
+
+    def to_s
+        s = "\n"
+        @dep_list.each_index { |i| s += "##{i + 1}\n" + @dep_list[i].to_s }
+        s
+    end
+
 end
 
 
-
-
 from_yaml=Department.read_from_YAML("output_yaml")
-puts from_yaml
-vika = Department.new('Vika', '+7-901-013-42-31')
-vika.add_duty("сделать всю домашку")
-vika.add_duty("найти работу")
-vika.add_duty("выспаться")
-from_yaml<<vika
-Department.write_to_YAML(from_yaml, "output_yaml")
+list_dep = Department_list.new()
+list_dep.add_note(from_yaml)
+ktoto = Department.new('Ktoto', '+7-901-013-42-31')
+ktoto.add_duty("1")
+ktoto.add_duty("2")
+ktoto.add_duty("3")
+list_dep.add_note(ktoto)
+puts list_dep
+list_dep.choose_note(2)
+list_dep.delete_note
+puts list_dep
+
+
+
+# Department.write_to_YAML(from_yaml, "output_yaml")
 # puts Department.read_from_YAML("output_yaml")
 # danna = Department.new("Danna", "+79009053535")
 # vika.highligth(3)

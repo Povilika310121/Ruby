@@ -20,7 +20,7 @@
   - найти хозяйку
   - попросить еды
 - !ruby/object:Department
-  name: Vika
+  name: Dima
   phone_number: "+7-901-013-42-31"
   duties:
   - сделать всю домашку
