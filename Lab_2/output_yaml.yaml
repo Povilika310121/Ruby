@@ -1,0 +1,21 @@
+---
+- !ruby/object:Department
+  name: Vilka
+  phone_number: "+7-901-013-42-31"
+  duties:
+  - поработать
+  - кота погладить
+- !ruby/object:Department
+  name: Danna
+  phone_number: "+79009053535"
+  duties:
+  - сдать вторую лабу
+  - отдохнуть
+  - сдать остальные лабы
+- !ruby/object:Department
+  name: Marik
+  phone_number: "+78887777777"
+  duties:
+  - помурлыкать
+  - найти хозяйку
+  - попросить еды
