@@ -89,6 +89,15 @@ class Department
   
 end
 
+class Department_list
+    def initialize(*list)  # * - Передача произвольного числа аргументов в метод
+      @dep_list = Array.new
+    end
+end
+
+
+
+
 from_yaml=Department.read_from_YAML("output_yaml")
 puts from_yaml
 vika = Department.new('Vika', '+7-901-013-42-31')
