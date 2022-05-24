@@ -44,18 +44,26 @@ class Department
             s = "Name: #{@name}\nPhone: #{@phone_number}\n"
         else
             s = "Name: #{@name}\nPhone: #{@phone_number}\nDuties: \n"
-            @duties.each_index { |i| s += "\t #{i+1}) #{@duties[i]}\n" } 
+            @duties.each_index { |i| s += "\t #{i+1}. #{@duties[i]}\n" } 
         end
         s + "\n"
+    end
+
+    def Department.read_from_txt(file_name)
+        file = File.new(file_name + ".txt", "r")
+        (file.read.split(/~\n/).map { |object_str| object_str.split(/\n/) }).map { |object| object = Department.new(object.shift, object.shift, object)}
+        #shift возвращает элемент массива и удаляет его
     end
   
 end
 
-vika = Department.new('Vika', '+7-901-013-42-31', )
-danna = Department.new("Danna", "+79009053535")
-vika.add_duty("сделать всю домашку")
-vika.add_duty("найти работу")
-vika.add_duty("выспаться")
-vika.highligth(3)
-vika.replace_highligth_duty("учиться всю ночь")
-puts vika, danna
+# vika = Department.new('Vika', '+7-901-013-42-31', )
+# danna = Department.new("Danna", "+79009053535")
+# vika.add_duty("сделать всю домашку")
+# vika.add_duty("найти работу")
+# vika.add_duty("выспаться")
+# vika.highligth(3)
+# vika.replace_highligth_duty("учиться всю ночь")
+# puts vika, danna
+
+p Department.read_from_txt("export").class.name
